@@ -1,0 +1,56 @@
+class Main{
+    function void main(){
+        var Fruit myFruit;
+        var Catcher myCatcher;
+        var char key;
+        var boolean exit;
+        var int dx;
+        var boolean collided;
+        var int catcherX, fruitX, fruitY;
+
+        let myFruit = Fruit.new(5,0);
+        let myCatcher = Catcher.new();
+        let key = Keyboard.keyPressed();
+        let exit = false;
+        let dx = 0;
+        let collided = false;
+
+        while(~exit){
+            if(key = 81){
+                let exit = true;
+            }
+            if(key = 132){
+                let dx = 10;
+            }
+            if(key = 130){
+                let dx = -10;
+            }
+
+
+            do myFruit.draw();
+            do myCatcher.draw();
+            
+            do myCatcher.move(dx);
+            do myFruit.update();
+
+            do myFruit.erase();
+            do myCatcher.erase();
+
+            let catcherX = myCatcher.getX();
+            let fruitX = myFruit.getX();
+            let fruitY = myFruit.getY();
+
+            if(((fruitX > catcherX) | (fruitX = catcherX)) & ((fruitX + 5 < catcherX + 10) | (fruitX + 5 = catcherX + 10)) & ((fruitY > 20) | (fruitY = 20)) & ((fruitY + 5 < 25) | (fruitY + 50 = 250)))
+            {
+                let collided = true;
+            }
+            
+            if(collided){
+                do myFruit.returnToTop();
+                let collided = false;
+            }
+            let key = Keyboard.keyPressed();
+        }
+        return;
+    }
+}
